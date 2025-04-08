@@ -1,4 +1,5 @@
 import newsLogo from '../assets/newsLogo.png'
+import profileLogo from '../assets/profileicon.jpg'
 import { useNavigate } from 'react-router-dom';
 import '../styles/Navbar.css'
 
@@ -20,19 +21,26 @@ const goHome = () => {
 
     return(
         <div className="navbar">
-            <img
-            className='news-logo'
-            src={newsLogo} 
-            alt="news logo"
-            onChange={goHome}
+            <div className='nav-left'>
+                <img className='news-logo' src={newsLogo} alt="news logo" onChange={goHome}/>
+                <ul className = "nav-links">
+                    <li>Tech</li>
+                    <li>Business</li>
+                </ul>
+            </div>
+            
+            <div className='nav-center'>
+                <input className="search-bar"
+                type="text"
+                placeholder="Search..."
+                value={query}
+                onChange={handleChange}
+                />
+            </div>
 
-            />
-            <input className="search-bar"
-            type="text"
-            placeholder="Search..."
-            value={query}
-            onChange={handleChange}
-            />
+            <div className='nav-right'>
+                <img className='profile-logo' src={profileLogo} />
+            </div>
         </div>
     )
 }
