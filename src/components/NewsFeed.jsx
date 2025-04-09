@@ -1,4 +1,4 @@
-import {useEffect, useState} from 'react';
+import { useEffect, useState } from 'react';
 import { loadCachedArticles } from '../services/savedArticlesService';
 
 import { NewsCard } from './NewsCard';
@@ -8,13 +8,13 @@ const NewsFeed = () => {
     const [loading, setLoading] = useState(true);
 
     useEffect(() => {
-        const getArticles = async () => {
+        const fetchArticles = async () => {
             const news = await loadCachedArticles();
             setArticles(news);
             setLoading(false);
         };
 
-    getArticles();
+    fetchArticles();
     }, [])
 
     if (loading) return <p>Loading articles...</p>;
@@ -24,7 +24,8 @@ const NewsFeed = () => {
             {articles.map((article) => (
                 <NewsCard key={article.title} article={article}/>
             ))}
-            <NewsCard key={article.title} article={article}/>
         </div>
     )
 }
+
+export default NewsFeed;

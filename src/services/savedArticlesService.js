@@ -1,5 +1,5 @@
-import db from '.firebase.js';
-import {collection, addDoc, getDoc, deleteDoc, doc, Timestamp} from 'firebase/firestore';
+import { db } from './firebase.js';
+import {collection, addDoc, getDocs, deleteDoc, doc, Timestamp} from 'firebase/firestore';
 
 const COLLECTION = 'cachedArticles';
 
