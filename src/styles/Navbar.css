@@ -18,7 +18,8 @@
 }
 
 
-.nav-links {
+.nav-news-links,
+.nav-market-links {
   list-style: none;
   flex: 1;
   display: flex;
@@ -30,8 +31,11 @@
   text-transform: uppercase;
 }
 
-.nav-left,
-.nav-right {
+.nav-market-links {
+  justify-content: right;
+}
+
+.nav-left {
   flex: 1;
   display: flex;
   align-items: center;
@@ -39,7 +43,13 @@
   gap: 50px;
 }
 
-
+.nav-right {
+  display: flex;
+  gap: 50px;
+  align-items: center;
+  justify-content: space-around;
+  flex: 1;
+}
 
 .nav-center {
   flex: 1;
@@ -56,15 +66,16 @@
   color: white;
 }
 
-.nav-links li {
+.nav-news-links li,
+.nav-market-links li {
   cursor: pointer;
   font-weight: 500;
   transition: color 0.2s ease;
 }
 
 .profile-logo {
-  width: 50px;
-  height: 50px;
+  width: 40px;
+  height: 40px;
   cursor: pointer;
   transition: filter 0.2s ease;
 }
@@ -74,8 +85,9 @@
   transition: filter 0.2s ease;
 }
 
-.nav-links li:hover, 
 .news-logo:hover,
+.nav-news-links li:hover, 
+.nav-market-links li:hover,
 .profile-logo:hover {
   color: #00bfff;
   filter: invert(32%) sepia(82%) saturate(4091%) hue-rotate(180deg) brightness(99%) contrast(94%);

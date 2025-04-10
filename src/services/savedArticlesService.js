@@ -3,16 +3,25 @@ import {collection, addDoc, getDocs, deleteDoc, doc, Timestamp} from 'firebase/f
 
 const COLLECTION = 'cachedArticles';
 
+const sleep = (ms) => new Promise(resolve => setTimeout(resolve, ms));
+
 export const fetchAndCacheArticles = async () => {
-    const res = await fetch(`https://gnews.io/api/v4/top-headlines?lang=en&country=us&max=1&apikey=${import.meta.env.VITE_GNEWS_API_KEY}`)
-    const data = await res.json();
+    const categories = ['general', 'business', 'technology'];
+    const allArticles = [];
 
-    const ref = collection(db, COLLECTION);
-        for(const article of data.articles) {
-            await addDoc(ref, {...article, cachedAt: Timestamp.now()});
+    for (const category of categories) {
+        const url = `https://gnews.io/api/v4/top-headlines?lang=en&country=us&max=1&topic=${category}&apikey=${import.meta.env.VITE_GNEWS_API_KEY}`;
+        const res = await fetch(url);
+        const data = await res.json();
+
+        const ref = collection(db, COLLECTION);
+
+        for (const article of data.articles) {
+            await addDoc(ref, {...article, category, cachedAt: Timestamp.now() })
         }
+    }
 
-    return data.articles;
+    return allArticles;
 };
 
 export const loadCachedArticles = async () => {
@@ -22,7 +31,7 @@ export const loadCachedArticles = async () => {
     if (snapshot.empty) return await fetchAndCacheArticles();
 
     const cachedAt = snapshot.docs[0].data().cachedAt.toDate();
-    const hoursOld = (Date.now() - cachedAt.getTime() / 1000 / 60 / 60)
+    const hoursOld = (Date.now() - cachedAt.getTime()) / 1000 / 60 / 60;
 
     if (hoursOld > 24) {
         for (const docSnap of snapshot.docs) {
