@@ -2,6 +2,7 @@ import { useEffect, useState } from 'react';
 import { loadCachedArticles } from '../services/savedArticlesService';
 
 import { NewsCard } from './NewsCard';
+import '../styles/NewsFeed.css';
 
 const NewsFeed = () => {
     const [articles, setArticles] = useState([]);
