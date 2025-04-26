@@ -1,0 +1,7 @@
+{
+  "/tech-news/page": "app/tech-news/page.js",
+  "/business-news/page": "app/business-news/page.js",
+  "/stocks/page": "app/stocks/page.js",
+  "/crypto/page": "app/crypto/page.js",
+  "/page": "app/page.js"
+}

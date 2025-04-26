@@ -1,0 +1,143 @@
+/*!***************************************************************************************************************************************************************************************************************************************************************!*\
+  !*** css ./node_modules/next/dist/build/webpack/loaders/css-loader/src/index.js??ruleSet[1].rules[13].oneOf[10].use[2]!./node_modules/next/dist/build/webpack/loaders/postcss-loader/src/index.js??ruleSet[1].rules[13].oneOf[10].use[3]!./styles/Footer.css ***!
+  \***************************************************************************************************************************************************************************************************************************************************************/
+.footer {
+    margin-top: 30px;
+    width: 100%;
+    background-color: #1e1e1e;
+    color: white;
+    text-align: center;
+    padding: 1rem 0;
+    font-size: 0.9rem;
+    z-index: 10;
+    box-shadow: 0 -2px 4px rgba(0, 0, 0, 0.1); /* optional subtle top shadow */
+  }
+/*!***************************************************************************************************************************************************************************************************************************************************************!*\
+  !*** css ./node_modules/next/dist/build/webpack/loaders/css-loader/src/index.js??ruleSet[1].rules[13].oneOf[10].use[2]!./node_modules/next/dist/build/webpack/loaders/postcss-loader/src/index.js??ruleSet[1].rules[13].oneOf[10].use[3]!./styles/Navbar.css ***!
+  \***************************************************************************************************************************************************************************************************************************************************************/
+* {
+  box-sizing: border-box;
+}
+.navbar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  background-color: #1e1e1e;
+  padding: 20px 40px;
+  color: white;
+  display: flex;
+  align-items: center;
+  font-family: sans-serif;
+  justify-content: space-between;
+  z-index: 10; /* stays on top of other elements */
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* optional subtle shadow */
+}
+
+
+.nav-news-links,
+.nav-market-links {
+  list-style: none;
+  flex: 1 1;
+  display: flex;
+  gap: 36px;
+  margin: 0;
+  padding: 0;
+  align-items: center;
+  font-size: 20px;
+  text-transform: uppercase;
+}
+
+.nav-market-links {
+  justify-content: right;
+}
+
+.nav-left {
+  flex: 1 1;
+  display: flex;
+  align-items: center;
+  justify-content: right;
+  gap: 50px;
+}
+
+.nav-right {
+  display: flex;
+  gap: 50px;
+  align-items: center;
+  justify-content: space-around;
+  flex: 1 1;
+}
+
+.nav-center {
+  flex: 1 1;
+  display: flex;
+  justify-content: center;
+}
+
+.search-bar {
+  width: 300px;
+  padding: 8px 12px;
+  border-radius: 6px;
+  border: 1px solid #999;
+  background-color: #3a3a3a;
+  color: white;
+}
+
+.nav-news-links li,
+.nav-market-links li {
+  cursor: pointer;
+  font-weight: 500;
+  transition: color 0.2s ease;
+}
+
+.profile-logo {
+  width: 40px;
+  height: 40px;
+  cursor: pointer;
+  transition: filter 0.2s ease;
+}
+
+.news-logo {
+  width: 40px;
+  height: 40px;
+  cursor: pointer;
+  transition: filter 0.2s ease;
+}
+
+.news-logo:hover,
+.nav-news-links li:hover, 
+.nav-market-links li:hover,
+.profile-logo:hover {
+  color: #00bfff;
+  filter: invert(32%) sepia(82%) saturate(4091%) hue-rotate(180deg) brightness(99%) contrast(94%);
+}
+/*!************************************************************************************************************************************************************************************************************************************************************!*\
+  !*** css ./node_modules/next/dist/build/webpack/loaders/css-loader/src/index.js??ruleSet[1].rules[13].oneOf[10].use[2]!./node_modules/next/dist/build/webpack/loaders/postcss-loader/src/index.js??ruleSet[1].rules[13].oneOf[10].use[3]!./styles/App.css ***!
+  \************************************************************************************************************************************************************************************************************************************************************/
+html, body {
+  height: 100%;
+  margin: 0;
+  padding: 0;
+}
+
+#root {
+  margin: 0;
+  padding: 0;
+  text-align: center;
+}
+
+.app-wrapper {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
+
+.main-content {
+  flex: 1 1;
+  padding-top:90px;
+}
+
+h2 {
+  justify-content: center;
+  align-content: center;
+}

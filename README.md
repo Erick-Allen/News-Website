@@ -1,12 +1,19 @@
-# React + Vite
+# News Website
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+## Overview
+A simple news app that pulls articles by category (tech, business, general). I originally made it with React + Vite but switched to Next.js so I could use serverless stuff and keep things cleaner.
 
-Currently, two official plugins are available:
+## Tech Stack
+- Next.js
+- Firebase Firestore
+- GNews API
+- Finnhub WebSocket API
+- CSS (basic styling)
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+## To-Do
+- Improve overall styling and layout
+- Add more stock and crypto price tracking with Finnhub
+- Add error handling for failed API requests
 
-## Expanding the ESLint configuration
-
-If you are developing a production application, we recommend using TypeScript and enable type-aware lint rules. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+---
+Not super polished yet but it works. Just a project for fun and learning.
