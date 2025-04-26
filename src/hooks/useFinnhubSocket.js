@@ -1,29 +1,95 @@
 import { useEffect, useState } from 'react';
-import { FINNHUB_WS_URL } from '../api/finnhub';
+import { FINNHUB_WS_URL, API_KEY } from '../api/finnhub';
 
-export const useFinnhubSocket = (symbol) => {
-    const [price, setPrice] = useState(null);
+const SOCKET_DELAY_MS = 4000;
+
+export const useFinnhubSocket = (symbolsInput) => {
+    const symbols = Array.isArray(symbolsInput) ? symbolsInput : [];
+    const [prices, setPrices] = useState({});
 
     useEffect(() => {
-        const socket = new WebSocket(FINNHUB_WS_URL);
+        if (symbols.length === 0) return;
 
-        socket.addEventListener('open', (event) => {
-            socket.send(JSON.stringify({ type: 'subscribe', symbol}));
-        });
-
-        socket.addEventListener('message', (event) => {
-            const message = JSON.parse(event.data);
-            if (message.type === 'trade' && message.data.length > 0) {
-                const trade = message.data[0];
-                setPrice(trade.p);
+        const fetchInitialPrices = async () => {
+            const updates = {};
+            for (const symbol of symbols) {
+                const res = await fetch(`https://finnhub.io/api/v1/quote?symbol=${symbol}&token=${API_KEY}`);
+                const data = await res.json();
+                if (data && data.c) {
+                    updates[symbol] = data.c;
+                }
             }
-        });
+            setPrices(prev => ({ ...prev, ...updates }));
+        };
+
+        fetchInitialPrices();
+
+        let socket;
+        let timeoutId;
+
+            timeoutId = setTimeout(() => {
+            socket = new WebSocket(FINNHUB_WS_URL);
+
+            socket.addEventListener('open', () => {
+                console.log("WebSocket connection opened");
+                symbols.forEach(symbol => {
+                    socket.send(JSON.stringify({ type: 'subscribe', symbol }));
+                });
+            });
+    
+            socket.addEventListener('message', (event) => {
+                const message = JSON.parse(event.data);
+                console.log("WebSocket message received:", message);
+                if (message.type === 'trade' && message.data.length > 0) {
+                    const updates = {};
+                    message.data.forEach(trade => {
+                        updates[trade.s] = trade.p;
+                    });
+                    setPrices(prev => ({ ...prev, ...updates }));
+                }
+            });
+    
+            
+                socket.addEventListener('error', (err) => {
+                    console.error("WebSocket error:", err);
+                });
+    
+                socket.addEventListener('close', () => {
+                    console.log("WebSocket closed for", symbols);
+                });
+        }, SOCKET_DELAY_MS);
+        
+
+        
 
         return () => {
-            socket.send(JSON.stringify({type: 'unsubscribe', symbol }));
-            socket.close();
+            clearTimeout(timeoutId);
+            if (socket && socket.readyState === WebSocket.OPEN) {
+                symbols.forEach(symbol => {
+                    socket.send(JSON.stringify({ type: 'unsubscribe', symbol }));
+                });
+                socket.close();
+            }
         };
-    }, [symbol])
+    }, [symbols.join(',')]);
 
-    return price;
+    return prices;
 };
+
+export const useMarketStatus = () => {
+    const [marketStatus, setMarketStatus] = useState(null);
+
+    useEffect(() => {
+        const fetchMarketStatus = async () => {
+            const res = await fetch(`https://finnhub.io/api/v1/stock/market-status?exchange=US&token=${API_KEY}`);
+            const data = await res.json();
+            if (data) {
+                setMarketStatus(data.isOpen);
+            }
+        };
+
+        fetchMarketStatus();
+    }, []);
+
+    return marketStatus;
+}

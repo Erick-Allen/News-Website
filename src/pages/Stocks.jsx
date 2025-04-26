@@ -1,12 +1,15 @@
-import { useFinnhubSocket } from "../hooks/useFinnhubSocket";
+import StockTickerList from "../components/StockTickerList";
+import {useMarketStatus } from "../hooks/useFinnhubSocket";
 
 const Stocks = () => {
-    const price = useFinnhubSocket("SPY");
+    const marketStatus = useMarketStatus();
+    const symbolsList = ["SPY", "AAPL", "MSFT"];
 
     return(
         <div>
             <h2>Stocks</h2>
-            <p>SPY (SPY) Price: {price ? `$${price.toFixed(2)}` : 'Loading...'}</p>
+            <h3>Market Status {marketStatus ? "Open" : "Closed"}</h3>
+            <StockTickerList symbols={symbolsList} />
         </div>
     )
 }

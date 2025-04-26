@@ -1,7 +1,7 @@
 import { useFinnhubSocket } from "../hooks/useFinnhubSocket";
 
 const Crypto = () => {
-    const price = useFinnhubSocket("BINANCE:BTCUSDT");
+    const { price } = useFinnhubSocket("BINANCE:BTCUSDT");
 
     return(
         <div>
